@@ -10,7 +10,7 @@ The “Accelerating Innovation with Integration Services” workshop identifies 
 4. Azure Event Hub
 5. Azure Service Bus
 
-Each skill corresponds to a service in Azure Integration Services and is essential for successful cloud-based integration solutions. Below, we provide a detailed hands-on training guide for each digital skill, followed by a comprehensive lab that integrates all these skills into one scenario. We also discuss best practices for creating effective step-by-step training, how to adapt to different skill levels, and strategies for reinforcing learning after the workshop.
+Each skill corresponds to a service in Azure Integration Services and is essential for successful cloud-based integration solutions. Below, we provide a detailed hands-on training guide for each digital skill, followed by a comprehensive lab that integrates all these skills into one scenario.
 
 ## Azure API Management (APIM) – Hands-On Guide
 
@@ -22,7 +22,7 @@ Learn how to create an API gateway, publish a backend service as an API, and app
 
 ## Azure Logic Apps – Hands-On Guide
 
-Azure Logic Apps enable you to orchestrate workflows that integrate various services without writing code. In this guide, you will create a logic app that triggers on a schedule and performs an action. This teaches the core concepts of triggers and actions in Logic Apps.
+Azure Logic Apps enable you to orchestrate workflows that integrate various services without writing code. In this guide, you will create two Logic Apps; one that triggers on a schedule and performs an action, and the other which receives a HTTP request, retrieves external data, and processes it. These teach the core concepts of triggers and actions in Logic Apps.
 
 ### Skill Objective: Logic Apps
 
