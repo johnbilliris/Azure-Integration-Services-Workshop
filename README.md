@@ -14,7 +14,7 @@ Each skill corresponds to a service in Azure Integration Services and is essenti
 
 ## Azure API Management (APIM) – Hands-On Guide
 
-APIM allows organizations to publish and manage APIs at scale, acting as a secure front door to backend services. This hands-on exercise will guide you through creating an API Management instance, adding a simple API, and testing it.
+APIM allows organizations to publish and manage APIs at scale, acting as a secure front door to backend services. This hands-on exercise will guide you through creating an API Management instance, adding APIs, adding policies, and testing.
 
 ### Skill Objective: API Management
 
@@ -51,7 +51,3 @@ Azure Event Grid is an event routing service that enables reactive, event-driven
 ### Skill Objective: Event Grid
 
 Learn to create a custom event stream and subscribe services to it. You will create an Event Grid Topic, configure a subscriber (Function), and publish a test event to observe end-to-end event handling.
-
-
-
-
