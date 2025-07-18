@@ -4,6 +4,9 @@
 
 Azure Logic Apps enable you to orchestrate workflows that integrate various services without writing code. In this guide, you will create two Logic Apps; one that triggers on a schedule and performs an action, and the other which receives a HTTP request, retrieves external data, and processes it. These teach the core concepts of triggers and actions in Logic Apps.
 
+> [!NOTE]  
+> In this hands-on guide you will create **Consumption** logic app workflow. For more advanced scenarios, consider using a **Standard** logic app workflow which offer additional features like stateful workflows, VS Code authoring,  and better performance.
+
 ### Skill Objective: Logic Apps
 
 Learn to build an automated workflow with a trigger and actions. This includes configuring a trigger (event or schedule) and adding steps such as sending an email or calling an API in a logic app.
