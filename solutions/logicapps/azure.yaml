@@ -1,0 +1,4 @@
+name: ais-hol-logicapps
+description: Azure Integration Services Workshop - Logic Apps
+metadata:
+  template: ais-hol-logicapps@0.0.1

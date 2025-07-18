@@ -1,0 +1,4 @@
+name: ais-hol-servicebus
+description: Azure Integration Services Workshop - Service Bus
+metadata:
+  template: ais-hol-servicebuss@0.0.1
