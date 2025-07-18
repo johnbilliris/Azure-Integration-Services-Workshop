@@ -4,6 +4,8 @@
 
 Azure Event Grid is an event routing service that enables reactive, event-driven architectures. In this exercise, you will set up a custom Event Grid Topic, subscribe an Azure Function to it, and send a test event. This demonstrates how to use Event Grid to loosely couple event producers and consumers.
 
+This exercise uses an Azure Event Hub as a source of events. Note that Azure Event Hub and Azure Event Grid are different services. Event Hubs is a big data streaming platform and event ingestion service, while Event Grid is an event routing service that allows you to subscribe to events from various Azure services and custom sources. Most Azure services emit events to Event Grid, which can then be routed to various endpoints like Azure Functions or Logic Apps.
+
 ### Skill Objective: Event Grid
 
 Learn to create a custom event stream and subscribe services to it. You will create an Event Grid Topic, configure a subscriber (Function), and publish a test event to observe end-to-end event handling.
