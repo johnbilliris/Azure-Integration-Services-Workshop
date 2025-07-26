@@ -1,6 +1,6 @@
 @minLength(1)
 @description('Location for all resources')
-param location string = 'australiaeast'
+param location string = resourceGroup().location
 
 param connections_office365_name string = 'office365'
 
@@ -12,9 +12,12 @@ param workflows_basic_name string = 'logicapp-basic'
 @description('Email recipient for notifications')
 param email_recipient string
 
+param tags object = {}
+
 resource connections_office365 'Microsoft.Web/connections@2016-06-01' = {
   name: connections_office365_name
   location: location
+  tags: tags
   #disable-next-line BCP187
   kind: 'V1'
   properties: {
@@ -41,6 +44,7 @@ resource connections_office365 'Microsoft.Web/connections@2016-06-01' = {
 resource workflows_httptrigger 'Microsoft.Logic/workflows@2019-05-01' = {
   name: workflows_httptrigger_name
   location: location
+  tags: tags
   properties: {
     state: 'Enabled'
     definition: {
@@ -174,6 +178,7 @@ resource workflows_httptrigger 'Microsoft.Logic/workflows@2019-05-01' = {
 resource workflows_basic 'Microsoft.Logic/workflows@2019-05-01' = {
   name: workflows_basic_name
   location: location
+  tags: tags
   properties: {
     state: 'Enabled'
     definition: {
