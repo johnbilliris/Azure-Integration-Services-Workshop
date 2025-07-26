@@ -6,9 +6,8 @@ This folder provides the necessary Bicep templates and configuration file to dep
 
 ### Steps
 
-1. Modify the `infra/main.bicepparam` file to set the parameters for your deployment, such as `resourceGroupName` and `location`.
-2. Use `azd up` to deploy the Service Bus.
-
-### Notes
-
-1. Currently, `azd down` has issues and fails to tear down (delete) the Service Bus. You need to manually delete the resource group from the Azure Portal.
+1. Modify the `infra/main.parameters.json` file to set the parameters for your deployment.
+1. Ensure you have the Azure Developer CLI (`azd`) installed
+1. Run the `azd auth login` command to authenticate with your Azure account.
+1. Use `azd up` to deploy the Service Bus.
+1. Use `azd down` to tear down the resource group and the resources.

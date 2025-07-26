@@ -1,19 +1,22 @@
 @minLength(1)
 @description('Location for all resources')
-param location string = 'australiaeast'
+param location string = resourceGroup().location
 
 @description('Name of the Service Bus')
 @minLength(1)
-param servicebus_name string = 'servicebus-ais-hol'
+param servicebus_name string = 'servicebus-aishol'
 
 @description('SKU for the Service Bus namespace')
 @allowed(['Basic', 'Standard', 'Premium'])
 @minLength(1)
 param servicebus_namespace_sku string = 'Standard'
 
+param tags object = {}
+
 resource servicebus 'Microsoft.ServiceBus/namespaces@2024-01-01' = {
   name: servicebus_name
   location: location
+  tags: tags
   sku: {
     name: servicebus_namespace_sku
     tier: servicebus_namespace_sku

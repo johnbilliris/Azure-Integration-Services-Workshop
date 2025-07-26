@@ -11,3 +11,4 @@ This folder provides the necessary Bicep templates and configuration file to dep
 1. Run the `azd auth login` command to authenticate with your Azure account.
 1. Use `azd up` to deploy the two Logic Apps and the Office 365 connection.
 1. The Office 365 connection is initially in `error` state. You need to manually configure the connection by providing the necessary credentials and permissions. (Instructions are not provided here, but typically you would do this through the Azure Portal by navigating to the API Connection in the resource group, and configuring the Office 365 connection.)
+1. Use `azd down` to tear down the resource group and the resources.
