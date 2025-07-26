@@ -1,0 +1,24 @@
+{
+    "version": "2.0",
+    "logging": {
+        "applicationInsights": {
+            "samplingSettings": {
+                "isEnabled": true,
+                "excludedTypes": "Request"
+            },
+            "enableLiveMetricsFilters": true
+        }
+    },
+    "concurrency": {
+        "dynamicConcurrencyEnabled": true,
+        "snapshotPersistenceEnabled": true
+    },
+    "extensions": {
+        "eventHubs": {
+            "eventProcessorOptions": {
+                "maxBatchSize": 64,
+                "prefetchCount": 256
+            }
+        }
+    }
+}

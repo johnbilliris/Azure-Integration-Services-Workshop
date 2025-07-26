@@ -2,13 +2,13 @@
 
 ## Azure Event Grid – Hands-On Guide
 
-Azure Event Grid is an event routing service that enables reactive, event-driven architectures. In this exercise, you will set up a custom Event Grid Topic, subscribe an Azure Function to it, and send a test event. This demonstrates how to use Event Grid to loosely couple event producers and consumers.
+Azure Event Grid is an event routing service that enables reactive, event-driven architectures. In this exercise, you will set up a custom Event Grid Topic, subscribe an Azure Event Hub to it, and send a test event. The optional exercises are to create a webhook and view the events, and create an Azure Function that processes events from the Event Hub. This demonstrates how to use Event Grid to loosely couple event producers and consumers.
 
-This exercise uses an Azure Event Hub as a source of events. Note that Azure Event Hub and Azure Event Grid are different services. Event Hubs is a big data streaming platform and event ingestion service, while Event Grid is an event routing service that allows you to subscribe to events from various Azure services and custom sources. Most Azure services emit events to Event Grid, which can then be routed to various endpoints like Azure Functions or Logic Apps.
+This exercise uses an Azure Event Hub as a source of events. Note that Azure Event Hub and Azure Event Grid are different services. Event Hubs is a big data streaming platform and event ingestion service, while Event Grid is an event routing service that allows you to subscribe to events from various Azure services and custom sources. Most Azure services emit events to Event Grid, which can then be routed to various endpoints like Azure Functions or Azure Logic Apps.
 
 ### Skill Objective: Event Grid
 
-Learn to create a custom event stream and subscribe services to it. You will create an Event Grid Topic, configure a subscriber (Function), and publish a test event to observe end-to-end event handling.
+Learn to create a custom event stream and subscribe services to it. You will create an Event Grid Topic, configure a subscriber (Event Hub and, optionally, an Azure Function), and publish a test event to observe end-to-end event handling.
 
 ## Guide Steps
 
@@ -58,7 +58,7 @@ Type a name for your event hub, then select **Review + create**.
 
 ### Step 3
 
-Create a Custom Event Grid Namespace – In Azure portal, search for Event Grid Namespaces and select + Create.
+Create a Custom Event Grid Namespace – In the Azure portal, search for Event Grid Namespaces and select + Create.
 
 ![Event Grid search bar](images/eventgrid-search-bar-namespace-topics.png)
 
@@ -66,13 +66,20 @@ Create a Custom Event Grid Namespace – In Azure portal, search for Event Grid 
 
 In the creation pane, choose your subscription and resource group, then enter a unique name for the namespace (it will form part of an URL) and a region. Under the **Security** tab, ensure that System assigned identity is **Enabled**. This allows Event Grid to authenticate with other Azure services securely.
 
+> NOTES:
+>
+>a. The name of the Event Grid can not start with a reserved prefix like "Microsoft", "System" or >"EventGrid". You will receive an error if you try to use such a name.
+>
+>b. If you deploy Event Grid to a region which supports Availability Zones, you must select the **Availability zones** option during the creation process.
+>
+
 Select **Review + create**. Once validation is successful, click on **Create**. Once deployment finishes, go to the new resource.
 
 ![Event Grid create namespace](images/eventgrid-create-namespace.png)
 
 ### Step 4
 
-Allow Event Grid to access the Event Hub – In the Event Grid Namespace, go to the Access control (IAM) tab. Click on + Add > Add role assignment.
+Allow Event Grid to access the Event Hub – In the Event Hub Namespace, go to the Access control (IAM) tab. Click on + Add > Add role assignment.
 
 Click on **Azure Event Hubs Data Sender** and select **Next**. In the Assign access to, select **Managed identity**. In Members, click the **+ Select members**. Then, in the right hand pane, select Event Grid Namespace in the Managed identity dropdown, and select the managed identity of the Event Grid Namespace. Click **Select**, then **Review + assign**, and again click **Review + assign**.
 
@@ -104,7 +111,7 @@ Click on **Create**. This sets up the subscription so that any events sent to th
 
 ### Step 7
 
-Publish a Test Event – To test the flow, we will manually publish an event to our new topic. One way is via Azure CLI in the Cloud Shell. For example, open the Cloud Shell and run the following commands (assuming Bash and Azure CLI):
+Publish a Test Event – To test the flow, we will manually publish an event to our new topic. One way is via Azure CLI in the Cloud Shell. For example, open the Azure Cloud Shell and run the following commands (assuming Bash and Azure CLI):
 
 ```bash
 # (just to verify the subscription exists, optional)
@@ -114,7 +121,7 @@ rg='<YourResourceGroup>'
 az eventgrid namespace topic event-subscription list --namespace-name $ns --topic-name $topic -g $rg
 ```
 
-> NOTE: If you are prompted to install an extension for eventgrid, > please confirm by typing `Y`.
+> NOTE: If you are prompted to install an extension for eventgrid, please confirm by typing `Y`.
 
 Then send an event:
 
@@ -127,18 +134,50 @@ curl -X POST -H "Content-Type: application/cloudevents+json" -H "Authorization:S
 
 ### Step 8
 
-Navigate to the Event Hubs Namespace page in the Azure portal, refresh the page and verify that incoming messages counter in the chart indicates that an event has been received.
+Navigate to the Event Hubs Namespace page in the Azure portal, refresh the page and verify that incoming messages counter in the chart indicates that an event has been received. This may take a minute or two to update.
 
 ![Event Grid Event Hub Received Event](images/eventgrid-event-hub-received-event.png)
 
 ### Step 9
 
-Optional: Create an Azure Function to Process Events – If you want to see how to process these events, you can create an Azure Function that listens to the Event Grid or the Event Hub. In the Azure portal, create a new Function App (similar to the previous exercise), and add a new function with an Event Grid trigger or an Event Hub trigger. The function will automatically be triggered whenever a new event is published.
+Optional: Create a topic subscription that send events to a Webhook. For every incoming event, the webhook will receive a POST request with the event data.
 
-[Event Grid Function Trigger Documentation](https://learn.microsoft.com/en-us/azure/azure-functions/functions-bindings-event-grid-trigger?tabs=csharp)
+Firstly, you will need to deploy the **Azure Event Grid Viewer** application. This is a simple web app that will display the events received from the Event Grid Topic. 
+
+1. Navigate to the [Azure Event Grid Viewer repository](https://github.com/Azure-Samples/azure-event-grid-viewer) and follow the instructions to deploy the Event Grid Viewer application.
+1. Open the Event Grid Viewer application in a new browser tab. You will see a web page that displays the events received from the Event Grid Topic. It will be in the form of `https://{{site-name}}.azurewebsites.net`
+1. Make note of the event subscription endpoint URL of the deployed application, as you will need it in the next step. It will be in the form of `https://{{site-name}}.azurewebsites.net/api/updates`
+
+Secondly, just like the steps in Step 6, go to the Event Grid Topic page of your topic, click Entities > Subscriptions. Then click + Subscription.
+
+1. Give the subscription a name, leave the schema as default, and choose Push as the Delivery mode.
+1. Select the endpoint type as **Webhook**
+1. Click on **Configure an endpoint** and configure the subscriber endpoint to the Event Grid Viewer application's event subscription endpoint URL.
+1. Click on **Create**. This sets up the subscription so that any events sent to this topic will be forwarded to the webhook.
+
+Following this, you can publish a test event again using the same commands as in Step 7.
+
+```bash
+event=' { "specversion": "1.0", "id": "'"$RANDOM"'", "type": "com.yourcompany.order.ordercreatedV2", "source" : "/mycontext", "subject": "orders/O-234595", "time": "'`date +%Y-%m-%dT%H:%M:%SZ`'", "datacontenttype" : "application/json", "data":{ "orderId": "O-234595", "url": "https://yourcompany.com/orders/o-234595"}} '
+curl -X POST -H "Content-Type: application/cloudevents+json" -H "Authorization:SharedAccessKey $key" -d "$event" $endpoint
+```
+
+The Event Grid Viewer application will receive the event and display it on the web page.
+
+![Event Grid Viewer Application Received Event](images/eventgrid-eventgridviewer-event.png)
+
+### Step 10
+
+Optional: Create an Azure Function to Process Events – If you want to see how to process these events, you can create an Azure Function that listens to the Event Hub.
+
+[Quickstart: Create a C# function in Azure using Visual Studio Code](https://learn.microsoft.com/en-us/azure/azure-functions/create-first-function-vs-code-csharp)
+
+[Connect Azure Functions to Azure Storage using Visual Studio Code](https://learn.microsoft.com/en-us/azure/azure-functions/functions-add-output-binding-storage-queue-vs-code?pivots=programming-language-csharp&tabs=isolated-process)
 
 [Event Hubs Function Trigger Documentation](https://learn.microsoft.com/en-us/azure/azure-functions/functions-bindings-event-hubs?tabs=csharp)
 
 ## Conclusion
 
-Through this exercise, you have configured an event-driven flow using Event Grid. You saw how to define a custom topic as an event source, and set up a subscription so that an Azure Function reacts to events on that topic. Event Grid decouples the sender and receiver – the sender doesn’t need to know about the function; it just emits events to the topic. This is powerful for building scalable, reactive integration patterns (e.g., triggering workflows when new files are uploaded, or broadcasting business events to multiple consumers).
+Through this exercise, you have configured an event-driven flow using Event Grid. You saw how to define a custom topic as an event source, and set up a subscription so that an Event Hub can receive events from that topic. The optional exercises to create a Webhook from the Event Grid, and an Azure Function that processes events from the Event Hub illustrates how to build reactive applications that respond to events in real-time.
+
+Event Grid decouples the sender and receiver – the sender doesn’t need to know about the function; it just emits events to the topic. This is powerful for building scalable, reactive integration patterns (e.g., triggering workflows when new files are uploaded, or broadcasting business events to multiple consumers).

@@ -412,3 +412,4 @@ __azurite_db*__.json
 .vscode/
 
 .azure/
+local.settings.json.bak

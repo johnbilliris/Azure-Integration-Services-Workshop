@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
+
+name: ais-hol-eventhub
+metadata:
+  template: ais-hol-eventhub@0.0.1
+services:
+  function:
+    project: ./src/
+    language: dotnet
+    host: function
+
+hooks:
+  postprovision:
+    windows:
+      shell: pwsh
+      run: ./scripts/generate-settings.ps1
+      interactive: true
+      continueOnError: false
+    posix:
+      shell: sh
+      run: ./scripts/generate-settings.sh
+      interactive: true
+      continueOnError: false

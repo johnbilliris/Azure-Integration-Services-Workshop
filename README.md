@@ -54,11 +54,11 @@ Learn to provision a message queue and exchange messages. You will create a Serv
 
 ## Azure Event Grid – Hands-On Guide
 
-Azure Event Grid is an event routing service that enables reactive, event-driven architectures. In this exercise, you will set up a custom Event Grid Topic, subscribe an Azure Function to it, and send a test event. This demonstrates how to use Event Grid to loosely couple event producers and consumers.
+Azure Event Grid is an event routing service that enables reactive, event-driven architectures. In this exercise, you will set up a custom Event Grid Topic, subscribe an Azure Event Hub to it, and send a test event. The optional exercises are to create a webhook and view the events, and create an Azure Function that processes events from the Event Hub. This demonstrates how to use Event Grid to loosely couple event producers and consumers.
 
 ### Skill Objective: Event Grid
 
-Learn to create a custom event stream and subscribe services to it. You will create an Event Grid Topic, configure a subscriber (Function), and publish a test event to observe end-to-end event handling.
+Learn to create a custom event stream and subscribe services to it. You will create an Event Grid Topic, configure a subscriber (Event Hub), and publish a test event to observe end-to-end event handling.
 
 [Click here to learn more about Azure Event Grid](https://learn.microsoft.com/en-us/azure/event-grid/)
 
