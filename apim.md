@@ -18,10 +18,11 @@ This lab is based on the [Azure API Management Hands on Lab](https://azure.githu
 
 Create an API Management Service – In the Azure portal, create a new API Management instance. Go to Create a resource > Integration > API Management. Fill in the basics (resource group, service name, region, organization name, admin email, pricing tier) and create the service.
 
+<!-- markdownlint-disable-next-line MD033 -->
 Please note that the **service name must be unique** across Azure, as it will be part of the public URL for your API Management instance (e.g., https://<service-name>.azure-api.net).
 
 > The **Pricing tier** is important. For this lab, you can use the **Developer** tier, which is the cheapest and ideal for our hands-on lab. If you want to use the **Standard** or **Premium** tiers, please ensure you have the necessary permissions and budget.
-
+<!-- markdownlint-disable-next-line MD028 -->
 > API Management stv2 services can take ~30-60 minutes to deploy, so plan accordingly. Otherwise, using API Management v2 services will take 5 minutes to deploy. However, as there is no **Developer** tier available for v2 services, you will need to use the **Basic** tier which is more expensive than the Developer stv2 tier.
 
 ![APIM deploy blade](images/apim-deploy-blade.png)
@@ -63,7 +64,7 @@ Once created, inside the *Star Wars* API press **+ Add operation** to declare tw
 - Display name: **Get People**  
 - Name will be populate with: **get-people**  
 - URL: **GET /people/**  
-
+<!-- markdownlint-disable-next-line MD029 -->
 2) **Get People By Id**
 
 - Display name: **Get People By Id**  
@@ -83,7 +84,7 @@ Let's add another API, the [Colors API](https://colors-api.azurewebsites.net/swa
   - Display name: **Colors API**  
   - Name: **colors-api**
   - Description: **Colors API**
-- This time we will choose to not provide API URL suffix. Without API URL suffix, there could be endpoint conflicts, you can always leverage [rewrite-uri](https://learn.microsoft.com/en-us/azure/api-management/api-management-transformation-policies#RewriteURL) policy to convert a request URL form to the form expected by the backend web service. 
+- This time we will choose to not provide API URL suffix. Without API URL suffix, there could be endpoint conflicts, you can always leverage [rewrite-uri](https://learn.microsoft.com/en-us/azure/api-management/api-management-transformation-policies#RewriteURL) policy to convert a request URL form to the form expected by the backend web service.
 
   ![APIM Add Colors API](images/apim-add-color-api-1.png)
 
@@ -139,8 +140,10 @@ Let's explore the policies applied to the **Starter** product.
 
 ![APIM Starter Product Policies](images/apim-starter-product-policies.png)
 
+<!-- markdownlint-disable-next-line MD029 -->
 5. In the policy editor, you can view and modify the policies applied to the **Starter** product.
-6. The rate limiting policy is defined as follows:
+1. The rate limiting policy is defined as follows:
+
 ```xml
     <inbound>
         <rate-limit calls="5" renewal-period="60" />
@@ -163,12 +166,15 @@ The calls to the **Star Wars** backend API (unfortunately) includes the subscrip
 1. In the API window, ensure that the **All operations** link is selected / underlined.
 1. Click on the **</>** icon in the **Inbound processing** section to view the policy editor for the *Star Wars* API.
 1. In the policy editor, add the following policy inside the `<inbound>` section (after the `<base />` tag):
+
 ```xml
     <inbound>
         <base />
         <set-header name="Ocp-Apim-Subscription-Key" exists-action="delete" />
     </inbound>
 ```
+
+<!-- markdownlint-disable-next-line MD029 -->
 7. Press **Save** to apply the policy.
 
 We can test the **Get people** API operation from the **Test** tab.
@@ -176,7 +182,7 @@ We can test the **Get people** API operation from the **Test** tab.
 - Select the **Get people** operation
 - Press the **Test** tab
 - Select the **Unlimited** product as the product.
-- Press the **Trace** button. 
+- Press the **Trace** button.
 
 When the trace is complete, you will see the request and response details. Go to the **Backend** (aka, **forward-request**) section and check the headers. You should see that the `Ocp-Apim-Subscription-Key` header has been removed from the request before it was sent to the backend service.
 

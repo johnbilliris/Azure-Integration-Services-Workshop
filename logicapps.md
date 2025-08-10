@@ -35,7 +35,7 @@ Define a Trigger – Every logic app starts with a trigger that fires the workfl
 1. Rename the **Recurrence** trigger with the following title: **Check for updates**.
 
 ![Logic App create](images/logicapps-build-scheduled-trigger.png)
-
+<!-- markdownlint-disable-next-line MD029 -->
 3. In the trigger information box, provide the following information:
 
    | Parameter | Value | Description |
@@ -81,7 +81,9 @@ Let's create a more advanced Logic App Resource that responds to a HTTP trigger,
 1. Once deployed, navigate to the Logic App designer.
 1. On the sidebar menu, under Development Tools, select the designer to open your blank workflow.
 1. Add the Request built-in trigger named When a HTTP request is received to your workflow by following the general steps to add a trigger
+<!-- markdownlint-disable-next-line MD059 -->
    [here](https://learn.microsoft.com/en-us/azure/logic-apps/add-trigger-action-workflow?tabs=consumption#add-trigger).
+<!-- markdownlint-disable-next-line MD032 -->
 1. In the trigger information box, provide the following information:
 
    | Parameter | Value | Description |
@@ -91,11 +93,12 @@ Let's create a more advanced Logic App Resource that responds to a HTTP trigger,
 
 At this point, the workflow designer will look similar to the following example.
 ![Logic App HTTP Trigger](images/logicapps-httptrigger.png)
-
+<!-- markdownlint-disable-next-line MD029 -->
 8. Add an Action by clicking **+** which is located underneath the trigger, and then clicking on **add an action**.
 1. Select the HTTP action by selecting the **Built-in** tab, then selecting **HTTP**, and then selecting the **HTTP** action.
 1. Configure the HTTP action to call the Colors API external API by using the following settings:
    - **Method**: GET
+   <!-- markdownlint-disable-next-line MD034 -->
    - **URI**: https://colors-api.azurewebsites.net/api/colors
 1. Change the name of the action to **Get Colors** by clicking on the action name, currently set to **HTTP** and typing the new name of **Get Colors**.
 At this stage, your workflow should look similar to the following example.
@@ -137,7 +140,7 @@ At this stage, your workflow should look similar to the following example.
 
 At this stage, your workflow should look similar to the following example.
 ![Logic App Parse JSON](images/logicapps-parsejson.png)
-
+<!-- markdownlint-disable-next-line MD029 -->
 14. Add a **For each** action to parse the response from the Colors API. Click **+**, search for **For each**, and select it.
 1. Configure the **For each action**, and in the **Select An Output From Previous Steps** box, click on the dynamic content icon (which appears as a lightning bolt icon) and select **Body** under the **Parse JSON** action.
 1. Change the name of the action to **For each Color** by clicking on the action name, currently set to **For each** and typing the new name of **For each Color**.
@@ -152,7 +155,7 @@ At this stage, your workflow should look similar to the following example.
 
 At this point, your workflow should look similar to the following example.
 ![Logic App Full Workflow](images/logicapps-full-workflow.png)
-
+<!-- markdownlint-disable-next-line MD029 -->
 20. Manually trigger the Logic App for testing: on the designer toolbar, use Run > Run.
 1. View the Run history to see the successful run entry. Clicking on it will show a timeline of steps: the trigger, the HTTP action, the Parse JSON action, the For each action, and the Response action. If all actions succeeded, verify that you received an email for each color with the details.
 

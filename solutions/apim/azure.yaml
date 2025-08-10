@@ -1,0 +1,4 @@
+name: ais-hol-apim
+description: Azure Integration Services Workshop - API Management
+metadata:
+  template: ais-hol-apim@0.0.1

@@ -142,7 +142,7 @@ Navigate to the Event Hubs Namespace page in the Azure portal, refresh the page 
 
 Optional: Create a topic subscription that send events to a Webhook. For every incoming event, the webhook will receive a POST request with the event data.
 
-Firstly, you will need to deploy the **Azure Event Grid Viewer** application. This is a simple web app that will display the events received from the Event Grid Topic. 
+Firstly, you will need to deploy the **Azure Event Grid Viewer** application. This is a simple web app that will display the events received from the Event Grid Topic.
 
 1. Navigate to the [Azure Event Grid Viewer repository](https://github.com/Azure-Samples/azure-event-grid-viewer) and follow the instructions to deploy the Event Grid Viewer application.
 1. Open the Event Grid Viewer application in a new browser tab. You will see a web page that displays the events received from the Event Grid Topic. It will be in the form of `https://{{site-name}}.azurewebsites.net`
