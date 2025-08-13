@@ -409,7 +409,6 @@ __queuestorage__
 __azurite_db*__.json
 
 # Added folders and file patterns
-.vscode/
 
 .azure/
 local.settings.json.bak
