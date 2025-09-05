@@ -1,0 +1,29 @@
+POST http://localhost:7071/api/Product
+Content-Type: application/json
+
+{
+    "name": "New Product",
+    "description": "Description of New Product",
+    "price": 9.99
+}
+
+###
+POST https://<your-function-app-name>.azurewebsites.net/api/Product
+Content-Type: application/json
+
+{
+    "name": "New Product",
+    "description": "Description of New Product",
+    "price": 9.99
+}
+
+###
+POST https://<your-apim>.azure-api.net/product
+Content-Type: application/json
+Ocp-Apim-Subscription-Key: <your-apim-subscription-key>
+
+{
+    "name": "New Product",
+    "description": "Description of New Product",
+    "price": 9.99
+}

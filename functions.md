@@ -30,7 +30,7 @@ The Azure Functions extension for Visual Studio Code integrates with Azure Funct
 
 In Visual Studio Code, select F1 to open the command palette, and then search for and run the command **Azure Functions: Install or Update Core Tools**.
 
-This command tries to either start a package-based installation of the latest version of Core Tools or update an existing package-based installation. If you don't have npm or Homebrew installed on your local computer, you must instead [manually install or update Core Tools](../articles/azure-functions/functions-run-local.md#install-the-azure-functions-core-tools).
+This command tries to either start a package-based installation of the latest version of Core Tools or update an existing package-based installation. If you don't have npm or Homebrew installed on your local computer, you must instead [manually install or update Core Tools](https://learn.microsoft.com/en-us/azure/azure-functions/functions-run-local#install-the-azure-functions-core-tools).
 
 ### Step 1
 
@@ -38,23 +38,24 @@ Create your local project
 
 In this section, you use Visual Studio Code to create a local Azure Functions project in C#. Later in this article, you'll publish your function code to Azure.
 
+<!-- markdownlint-disable-next-line MD033 -->
 1. In Visual Studio Code, press <kbd>F1</kbd> to open the command palette and search for and run the command `Azure Functions: Create New Project...`.
 
 1. Select the directory location for your project workspace and choose **Select**. You should either create a new folder or choose an empty folder for the project workspace. Don't choose a project folder that is already part of a workspace.
- 
+
 1. Provide the following information at the prompts:
 
     |Prompt|Selection|
     |--|--|
     |**Select a language for your function project**|Choose `C#`.|
     | **Select a .NET runtime** | Choose `.NET 8.0 Isolated (LTS)`.|
-    |**Select a template for your project's first function**|Choose `HTTP trigger`.<sup>1</sup>|
+    |**Select a template for your project's first function**|Choose `HTTP trigger`.$^{1}$|
     |**Provide a function name**|Type `HttpExample`.|
     |**Provide a namespace** | Type `My.Functions`. |
-    |**Authorization level**|Choose `Anonymous`, which enables anyone to call your function endpoint. For more information, see [Authorization level](functions-bindings-http-webhook-trigger.md#http-auth).|
+    |**Authorization level**|Choose `Anonymous`, which enables anyone to call your function endpoint. For more information, see [Authorization level](https://learn.microsoft.com/en-us/azure/azure-functions/functions-bindings-http-webhook-trigger?tabs=python-v2%2Cisolated-process%2Cnodejs-v4%2Cfunctionsv2&pivots=programming-language-csharp#http-auth).|
     |**Select how you would like to open your project**|Select `Open in current window`.|
 
-    <sup>1</sup> Depending on your VS Code settings, you may need to use the `Change template filter` option to see the full list of templates.
+    $^{1}$ Depending on your VS Code settings, you may need to use the `Change template filter` option to see the full list of templates.
 
 1. Visual Studio Code uses the provided information and generates an Azure Functions project with an HTTP trigger. You can view the local project files in the Explorer.
 
@@ -63,22 +64,22 @@ In this section, you use Visual Studio Code to create a local Azure Functions pr
 Run the function locally
 
 Visual Studio Code integrates with [Azure Functions Core tools](https://learn.microsoft.com/en-us/azure/azure-functions/functions-run-local) to let you run this project on your local development computer before you publish to Azure. If you don't already have Core Tools installed locally, you are prompted to install it the first time you run your project.
-
+<!-- markdownlint-disable-next-line MD033 -->
 1. To call your function, press <kbd>F5</kbd> to start the function app project. The **Terminal** panel displays the output from Core Tools. Your app starts in the **Terminal** panel. You can see the URL endpoint of your HTTP-triggered function running locally.
 
 ![Function run locally](images/functions-vscode-f5.png)
 
 If you don't already have Core Tools installed, select **Install** to install Core Tools when prompted to do so.  
 If you have trouble running on Windows, make sure that the default terminal for Visual Studio Code isn't set to **WSL Bash**.
-
+<!-- markdownlint-disable-next-line MD029 MD033 -->
 2. With the Core Tools running, go to the **Azure: Functions** area. Under **Functions**, expand **Local Project** > **Functions**. Right-click (Windows) or <kbd>Ctrl -</kbd> click (macOS) the `HttpExample` function and choose **Execute Function Now...**.
 
 ![Execute Function Now](images/functions-execute-function-now.png)
-
+<!-- markdownlint-disable-next-line MD029 MD033 -->
 3. In the **Enter request body**, press <kbd>Enter</kbd> to send a request message to your function.
-
+<!-- markdownlint-disable-next-line MD029 -->
 4. When the function executes locally and returns a response, a notification is raised in Visual Studio Code. Information about the function execution is shown in the **Terminal** panel.
-
+<!-- markdownlint-disable-next-line MD029 MD033 -->
 5. Press <kbd>Ctrl + C</kbd> to stop Core Tools and disconnect the debugger.
 
 After checking that the function runs correctly on your local computer, it's time to use Visual Studio Code to publish the project directly to Azure.
@@ -94,7 +95,7 @@ Before you can create Azure resources or publish your app, you must sign in to A
 ![Sign in to Azure](images/functions-sign-into-azure.png)
 
 If you're already signed in and can see your existing subscriptions, go to the next section.
-
+<!-- markdownlint-disable-next-line MD029 -->
 2. When you are prompted in the browser, select your Azure account and sign in by using your Azure account credentials. If you create a new account, you can sign in after your account is created.
 
 1. After you successfully sign in, you can close the new browser window. The subscriptions that belong to your Azure account are displayed in the side bar.
@@ -115,7 +116,7 @@ In this section, you create a function app in the Flex Consumption plan along wi
     |**Enter a new function app name**| Enter a globally unique name that's valid in a URL path. The name you enter is validated to make sure that it's unique in Azure Functions. |
     |**Select a location for new resources**| Select an Azure region. For better performance, select a [region](https://azure.microsoft.com/regions/) near you. Only regions supported by Flex Consumption plans are displayed. |
     |**Select a runtime stack**| Select the language version you currently run locally. |
-    | **Select resource authentication type** | Select **Managed identity**, which is the most secure option for connecting to the [default host storage account](../articles/azure-functions/storage-considerations.md#storage-account-guidance). |
+    | **Select resource authentication type** | Select **Managed identity**, which is the most secure option for connecting to the [default host storage account](https://learn.microsoft.com/en-us/azure/azure-functions/storage-considerations?tabs=azure-cli#storage-account-guidance). |
 
 1. When the function app is created, the following related resources are created in your Azure subscription. The resources are named based on the name you entered for your function app.
 
@@ -143,7 +144,7 @@ Deploy the project to Azure
 ### Step 6
 
 Run the function in Azure
-
+<!-- markdownlint-disable-next-line MD033 -->
 1. Press <kbd>F1</kbd> to display the command palette, then search for and run the command `Azure Functions:Execute Function Now...`. If prompted, select your subscription.
 
 2. Select your new function app resource and `HttpExample` as your function.
@@ -155,9 +156,9 @@ Run the function in Azure
 ### Step 7
 
 Optional: Connection functions to Azure service using bindings.
-
+<!-- markdownlint-disable-next-line MD034 -->
 https://learn.microsoft.com/en-us/azure/azure-functions/add-bindings-existing-function
-
+<!-- markdownlint-disable-next-line MD034 -->
 The binding reference for Azure Service Bus. https://learn.microsoft.com/en-us/azure/azure-functions/functions-bindings-service-bus-trigger
 
 ## Conclusion
