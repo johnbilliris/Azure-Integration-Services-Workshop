@@ -99,7 +99,7 @@ At this point, the workflow designer will look similar to the following example.
 1. Configure the HTTP action to call the Colors API external API by using the following settings:
    - **Method**: GET
    <!-- markdownlint-disable-next-line MD034 -->
-   - **URI**: https://colors-api.azurewebsites.net/api/colors
+   - **URI**: https://colors-api.azurewebsites.net/colors
 1. Change the name of the action to **Get Colors** by clicking on the action name, currently set to **HTTP** and typing the new name of **Get Colors**.
 At this stage, your workflow should look similar to the following example.
 ![Logic App HTTP Action](images/logicapps-get-httpaction.png)
